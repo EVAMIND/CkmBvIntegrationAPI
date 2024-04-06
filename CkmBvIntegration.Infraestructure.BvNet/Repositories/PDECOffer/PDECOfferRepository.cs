@@ -1,4 +1,5 @@
 ﻿using CkmBvIntegration.Domain.Models.Authentication;
+using CkmBvIntegration.Domain.Models.PDECOffer;
 using CkmBvIntegration.Domain.Models.Proposal;
 using CkmBvIntegration.Infraestructure.BvNet.Interfaces.Authentication;
 using CkmBvIntegration.Infraestructure.BvNet.Interfaces.Proposal;
@@ -8,29 +9,30 @@ using Newtonsoft.Json;
 
 namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
 {
-    public class ProposalRepository(
+    public class PDECOfferRepository(
         IHttpClientFactory httpClientFactory,
-        ILogger<ProposalRepository> logger) : BaseRepository<ProposalResponse>(httpClientFactory, "BvProposalAPI", logger), IProposalRepository
+        ILogger<PDECOfferRepository> logger) : BaseRepository<PDECOfferResponse>(httpClientFactory, "BvPDECOfferAPI", logger), IPDECOfferRepository
     {
         private ILogger _logger = logger;
 
-        public async Task<ProposalResponse> RequestCreditCardProposal(ProposalRequest proposalRequest, string token)
+        public async Task<PDECOfferResponse> RequestCreditOfferAsync(PDECOfferRequest pDECOfferRequest, string token)
         {
+
             string relativeURL = $"";
             string jsonResponse;
 
             try
             {
-                jsonResponse = await PostAsync(relativeURL, proposalRequest, token);
+                jsonResponse = await PostAsync(relativeURL, pDECOfferRequest, token);
             }
             catch (Exception ex)
             {
-                _logger.LogError(message: "Error when execute RequestCreditCardProposal: " + ex.Message);
+                _logger.LogError(message: "Error when execute RequestCreditOfferAsync: " + ex.Message);
                 throw;
             }
 
-            ProposalResponse proposalResponse = JsonConvert.DeserializeObject<ProposalResponse>(jsonResponse) ?? new ProposalResponse();
-            return proposalResponse;
+            PDECOfferResponse pDECOfferResponse = JsonConvert.DeserializeObject<PDECOfferResponse>(jsonResponse) ?? new PDECOfferResponse();
+            return pDECOfferResponse;
         }
     }
 }

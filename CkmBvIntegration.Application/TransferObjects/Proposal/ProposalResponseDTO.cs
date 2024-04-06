@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CkmBvIntegration.Application.TransferObjects.Proposal
 {
-    internal class ProposalResponseDTO
+    public class ProposalResponseDTO
     {
+        public string retorno {get;set;}
     }
 }

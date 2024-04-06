@@ -1,26 +1,34 @@
 ﻿using AutoMapper;
 using CkmBvIntegration.Application.Interfaces.Authentication;
 using CkmBvIntegration.Application.TransferObjects.Authentication;
+using CkmBvIntegration.Application.TransferObjects.Proposal;
 using CkmBvIntegration.Domain.Models.Authentication;
+using CkmBvIntegration.Domain.Models.Proposal;
 using CkmBvIntegration.Infraestructure.BvNet.Interfaces.Authentication;
+using CkmBvIntegration.Infraestructure.BvNet.Interfaces.Proposal;
 
 namespace CkmBvIntegration.Application.Applications.Authentication
 {
     public class ProposalApplication : IProposalApplication
     {
         private IMapper _mapper;
-        private readonly IAuthenticationRepository _authenticationRepository;
-        public ProposalApplication(IAuthenticationRepository authenticationRepository, IMapper mapper)
+        private readonly IProposalRepository _proposalRepository;
+        public ProposalApplication(
+            IProposalRepository proposalRepository,
+            IMapper mapper)
         {
-            _authenticationRepository = authenticationRepository;
+            _proposalRepository = proposalRepository;
             _mapper = mapper;
         }
-        public async Task<AuthenticationResponseDTO> GenerateTokenAsync(AuthenticationRequestDTO authenticationDTO)
-        {
-         
-            var token = await _authenticationRepository.GenerateTokenAsync(_mapper.Map<AuthenticationRequest>(authenticationDTO));
 
-            return _mapper.Map<AuthenticationResponseDTO>(token);
+
+        public async Task<ProposalResponseDTO> RequestCreditCardProposal(ProposalRequestDTO proposalRequestDTO, string token)
+        {          
+
+            ProposalResponse proposalResponse = await _proposalRepository.RequestCreditCardProposal(_mapper.Map<ProposalRequest>(proposalRequestDTO), token);
+
+            return _mapper.Map<ProposalResponseDTO>(proposalResponse);
+
         }
     }
 }

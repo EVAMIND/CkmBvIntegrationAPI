@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CkmBvIntegration.Domain.Models.ProposalStatus
+namespace CkmBvIntegration.Application.TransferObjects.ProposalStatus
 {
-    public class ProposalStatusRequest
+    public class ProposalStatusRequestDTO
     {
         public string nuCpfCnpj { get; set; }
         public int cdMeioVenda { get; set; }

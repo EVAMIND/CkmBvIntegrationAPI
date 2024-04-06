@@ -1,5 +1,7 @@
 ﻿using CkmBvIntegration.Application.Applications.Authentication;
 using CkmBvIntegration.Application.Interfaces.Authentication;
+using CkmBvIntegration.Application.Interfaces.PDECOffer;
+using CkmBvIntegration.Application.Interfaces.ProposalStatus;
 using CkmBvIntegration.Domain.Exceptions.Models;
 using CkmBvIntegration.Domain.Models.HttpClientSettings;
 using CkmBvIntegration.Infraestructure.BvNet.Interfaces._Base;
@@ -26,17 +28,24 @@ namespace CkmBvIntegration.Application.DependencyInjection
         public static void ConfigureApplications(IServiceCollection services) {
             services.AddScoped<IAuthenticationApplication, AuthenticationApplication>();
             services.AddScoped<IProposalApplication, ProposalApplication>();
+            services.AddScoped<IProposalStatusApplication, ProposalStatusApplication>();
+            services.AddScoped<IPDECOfferApplication, PDECOfferApplication>();
         }
 
         public static void ConfigureRepositories(IServiceCollection services) {
             services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));   
             services.AddScoped<IAuthenticationRepository, AuthenticationRepository>();
             services.AddScoped<IProposalRepository, ProposalRepository>();
+            services.AddScoped<IProposalStatusRepository, ProposalStatusRepository>();
+            services.AddScoped<IPDECOfferRepository, PDECOfferRepository>();
         }
 
         public static void ConfigureMessagesAndExceptions(IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<AuthenticationExceptions>(configuration.GetSection("ExceptionMessages"));
+            services.Configure<ProposalExceptions>(configuration.GetSection("ProposalMessages"));
+            services.Configure<ProposalStatusExceptions>(configuration.GetSection("ProposalStatusMessages"));
+            services.Configure<PDECOfferExceptions>(configuration.GetSection("PDECOfferMessages"));
         }
 
         

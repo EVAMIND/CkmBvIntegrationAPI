@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace CkmBvIntegration.Domain.Models.Proposal
 {
-    internal class ProposalResponse
+    public class ProposalResponse
     {
+        public string retorno { get; set; }
     }
 }

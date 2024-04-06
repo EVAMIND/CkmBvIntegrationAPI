@@ -1,4 +1,5 @@
 ﻿using CkmBvIntegration.Domain.Models.Proposal;
+using CkmBvIntegration.Domain.Models.ProposalStatus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace CkmBvIntegration.Infraestructure.BvNet.Interfaces.Proposal
 {
-    public interface IProposalRepository
+    public interface IProposalStatusRepository
     {
-        Task<ProposalResponse> RequestCreditCardProposal(ProposalRequest proposalRequest, string token);
+        Task<ProposalStatusResponse> GetProposalStatusAsync(ProposalStatusRequest proposalStatusRequest, string token);
     }
 }

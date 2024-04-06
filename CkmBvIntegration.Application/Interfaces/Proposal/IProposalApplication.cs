@@ -1,4 +1,5 @@
 ﻿using CkmBvIntegration.Application.TransferObjects.Authentication;
+using CkmBvIntegration.Application.TransferObjects.Proposal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace CkmBvIntegration.Application.Interfaces.Authentication
 {
     public interface IProposalApplication
     {
-        //Task<AuthenticationResponseDTO> GenerateTokenAsync(AuthenticationRequestDTO authenticationDTO);
+        Task<ProposalResponseDTO> RequestCreditCardProposal(ProposalRequestDTO proposalRequestDTO, string token);
     }
 }

@@ -13,6 +13,19 @@ builder.Services.ConfigureServices(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(ApiMappingProfile));
 #endregion
 
+//builder.Services.AddAuthentication(options =>
+//{
+//    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//})
+//   .AddJwtBearer(options =>
+//   {
+//       options.Authority = "https://your-identity-server";
+//       options.TokenValidationParameters = new TokenValidationParameters
+//       {
+//           ValidateAudience = false
+//       };
+//   });
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddHttpClient();
@@ -26,7 +39,13 @@ builder.Services.AddSwaggerGen(options =>
     options.OperationFilter<AuthenticationOperationFilter>();
 
     options.SchemaFilter<ProposalFilterSchema>();
-    options.OperationFilter<ProposalOperationFilter>();
+    options.OperationFilter<ProposalOperationFilter>();  
+    
+    options.SchemaFilter<ProposalStatusFilterSchema>();
+    options.OperationFilter<ProposalStatusOperationFilter>(); 
+    
+    options.SchemaFilter<PDECOfferFilterSchema>();
+    options.OperationFilter<PDECOfferOperationFilter>();
 });
 #endregion
 
@@ -42,6 +61,8 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.UseAuthentication();
 
 app.MapControllers();
 
