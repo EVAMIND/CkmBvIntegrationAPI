@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CkmBvIntegration.Application.TransferObjects
+namespace CkmBvIntegration.Application.TransferObjects.Authentication
 {
     public class AuthenticationResponseDTO
     {
-        public string token { get; set; } = string.Empty;
+        public string token { get; set; }
     }
 }

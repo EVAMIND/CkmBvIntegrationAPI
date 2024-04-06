@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using CkmBvIntegration.Application.TransferObjects;
+using CkmBvIntegration.Application.TransferObjects.Authentication;
 using CkmBvIntegration.Domain.Models.Authentication;
 
 namespace CkmBvIntegration.Application.AutoMapper;

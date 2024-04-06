@@ -3,19 +3,14 @@ using CkmBvIntegration.Application.Interfaces.Authentication;
 using CkmBvIntegration.Application.TransferObjects.Authentication;
 using CkmBvIntegration.Domain.Models.Authentication;
 using CkmBvIntegration.Infraestructure.BvNet.Interfaces.Authentication;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CkmBvIntegration.Application.Applications.Authentication
 {
-    public class AuthenticationApplication : IAuthenticationApplication
+    public class ProposalApplication : IProposalApplication
     {
         private IMapper _mapper;
         private readonly IAuthenticationRepository _authenticationRepository;
-        public AuthenticationApplication(IAuthenticationRepository authenticationRepository, IMapper mapper)
+        public ProposalApplication(IAuthenticationRepository authenticationRepository, IMapper mapper)
         {
             _authenticationRepository = authenticationRepository;
             _mapper = mapper;

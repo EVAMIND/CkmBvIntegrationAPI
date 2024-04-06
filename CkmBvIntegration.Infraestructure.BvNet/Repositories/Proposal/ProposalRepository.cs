@@ -1,5 +1,6 @@
 ﻿using CkmBvIntegration.Domain.Models.Authentication;
 using CkmBvIntegration.Infraestructure.BvNet.Interfaces.Authentication;
+using CkmBvIntegration.Infraestructure.BvNet.Interfaces.Proposal;
 using CkmBvIntegration.Infraestructure.BvNet.Repositories._Base;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
@@ -8,7 +9,7 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
 {
     public class ProposalRepository(
         IHttpClientFactory httpClientFactory,
-        ILogger<ProposalRepository> logger) : BaseRepository<AuthenticationResponse>(httpClientFactory, "BvTokenAPI", logger), IAuthenticationRepository
+        ILogger<ProposalRepository> logger) : BaseRepository<AuthenticationResponse>(httpClientFactory, "BvProposalAPI", logger), IProposalRepository
     {
         private ILogger _logger = logger;
 
@@ -26,7 +27,7 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
                 throw;
             }
 
-   
+
             AuthenticationResponse token = JsonConvert.DeserializeObject<AuthenticationResponse>(jsonResponse) ?? new AuthenticationResponse();
             return token;
         }

@@ -1,4 +1,4 @@
-﻿using CkmBvIntegration.Application.TransferObjects;
+﻿using CkmBvIntegration.Application.TransferObjects.Authentication;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 

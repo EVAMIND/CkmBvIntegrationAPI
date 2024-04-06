@@ -1,6 +1,6 @@
 ﻿using CkmBvIntegration.API.Controllers.Base;
 using CkmBvIntegration.Application.Interfaces.Authentication;
-using CkmBvIntegration.Application.TransferObjects;
+using CkmBvIntegration.Application.TransferObjects.Authentication;
 using CkmBvIntegration.Domain.Exceptions.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -33,7 +33,6 @@ namespace CkmBvIntegration.API.Controllers.Authentication
             {
                 _logger.LogInformation("Iniciando processo de geração de Token");
 
-                // Assuma que `FindItemAsync` seja um método assíncrono que busca um item
                 var token = await _authenticationApplication.GenerateTokenAsync(authenticationDTO);
 
                 return token == null ? throw new ArgumentException(_exceptionMessages.ItemNotFound) : token;

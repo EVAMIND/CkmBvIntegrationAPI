@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace CkmBvIntegration.Application.Interfaces.Authentication
 {
-    public interface IAuthenticationApplication
+    public interface IProposalApplication
     {
-        Task<AuthenticationResponseDTO> GenerateTokenAsync(AuthenticationRequestDTO authenticationDTO);
+        //Task<AuthenticationResponseDTO> GenerateTokenAsync(AuthenticationRequestDTO authenticationDTO);
     }
 }
