@@ -14,11 +14,11 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.Authentication
 
         public async Task<AuthenticationResponse> GenerateTokenAsync(AuthenticationRequest authenticationRequest)
         {
-            string relativeURL = $"token/id";
+            string relativeURL = $"";
             string jsonResponse;
             try
             {
-                jsonResponse = await GetAsync(relativeURL);
+                jsonResponse = await PostAsync(relativeURL, authenticationRequest);
             }
             catch (Exception ex)
             {

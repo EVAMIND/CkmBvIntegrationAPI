@@ -17,7 +17,7 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
 
         public async Task<ProposalStatusResponse> GetProposalStatusAsync(ProposalStatusRequest proposalStatusRequest, string token)
         {
-            string relativeURL = $"";
+            string relativeURL = $"?cdMeioVenda={proposalStatusRequest.cdMeioVenda}&nmParceiro={proposalStatusRequest.nmParceiro}";
             string jsonResponse;
 
             try

@@ -18,7 +18,7 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
         public async Task<PDECOfferResponse> RequestCreditOfferAsync(PDECOfferRequest pDECOfferRequest, string token)
         {
 
-            string relativeURL = $"";
+            string relativeURL = $"{pDECOfferRequest.dados.codigoParceiro}";
             string jsonResponse;
 
             try
