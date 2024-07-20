@@ -48,9 +48,14 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories._Base
             }
 
 
+
             var requestData = BuildRequestData(content);
 
             var requestContent = new FormUrlEncodedContent(requestData);
+            //string json = JsonConvert.SerializeObject(content); 
+            //var requestContent = new StringContent(json, Encoding.UTF8, "application/json"); 
+            //var httpResponse = await httpClient.PostAsync("http://www.foo.bar", httpContent);
+
 
 
             var response =  await _httpClient.PostAsync(uri, requestContent);
