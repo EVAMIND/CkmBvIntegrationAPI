@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CkmBvIntegration.Domain.Models.Authentication;
 
-namespace CkmBvIntegration.Application.TransferObjects.Authentication
+namespace CkmBvIntegration.Application.TransferObjects.Authentication;
+
+public class AuthenticationResponseDTO : AuthenticationResponse
 {
-    public class AuthenticationResponseDTO
-    {
-        public string token { get; set; }
-    }
+    
 }
