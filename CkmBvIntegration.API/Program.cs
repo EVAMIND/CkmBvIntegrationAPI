@@ -2,18 +2,28 @@ using CkmBvIntegration.API.Filters.OperationFilter.AuthenticationFilter;
 using CkmBvIntegration.API.Filters.Schemas.AuthenticationFilter;
 using CkmBvIntegration.Application.AutoMapper;
 using CkmBvIntegration.Application.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using CkmAuthorizationTools.AuthenticationServices.Extensions;
+using CkmAuthorizationTools.AuthorizationServices.Extensions;
+using CkmBvIntegration.Domain.Models.Authentication;
 
 var builder = WebApplication.CreateBuilder(args);
+var Configuration = builder.Configuration;
+var Services = builder.Services;
 
 #region Initialize Applications and Repositories
-builder.Services.ConfigureServices(builder.Configuration);
+Services.ConfigureServices(builder.Configuration);
+Services.AddSingleton<AuthenticationResponse>();
 #endregion
 
 #region AutoMapper
-builder.Services.AddAutoMapper(typeof(ApiMappingProfile));
+Services.AddAutoMapper(typeof(ApiMappingProfile));
+
 #endregion
 
-//builder.Services.AddAuthentication(options =>
+Services.AddCustomAuthentication(Configuration);
+
+//Services.AddAuthentication(options =>
 //{
 //    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 //    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -27,13 +37,13 @@ builder.Services.AddAutoMapper(typeof(ApiMappingProfile));
 //       };
 //   });
 // Add services to the container.
-builder.Services.AddControllers();
-builder.Services.AddHttpClient();
+Services.AddControllers();
+Services.AddHttpClient();
 
 #region Swagger 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(options =>
+Services.AddEndpointsApiExplorer();
+Services.AddSwaggerGen(options =>
 {
     options.SchemaFilter<AuthenticationFilterSchema>();
     options.OperationFilter<AuthenticationOperationFilter>();

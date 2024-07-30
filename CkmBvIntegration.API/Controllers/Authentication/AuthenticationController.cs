@@ -27,13 +27,13 @@ namespace CkmBvIntegration.API.Controllers.Authentication
         }
 
         [HttpPost("GenerateTokenAsync")]
-        public async Task<ActionResult<AuthenticationResponseDTO>> GenerateTokenAsync([FromBody] AuthenticationRequestDTO authenticationDTO)
+        public async Task<ActionResult<AuthenticationResponseDTO>> GenerateTokenAsync()
         {
             return await ExecuteAsync(async () =>
             {
                 _logger.LogInformation("Iniciando processo de geração de Token");
 
-                var token = await _authenticationApplication.GenerateTokenAsync(authenticationDTO);
+                var token = await _authenticationApplication.GenerateTokenAsync();
 
                 return token == null ? throw new ArgumentException(_exceptionMessages.ItemNotFound) : token;
             });

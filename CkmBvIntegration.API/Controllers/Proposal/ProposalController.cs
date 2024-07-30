@@ -13,6 +13,7 @@ namespace CkmBvIntegration.API.Controllers.Proposal
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProposalController : BaseController
     {
         private ILogger _logger;

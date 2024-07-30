@@ -9,6 +9,6 @@ namespace CkmBvIntegration.Application.Interfaces.Authentication
 {
     public interface IAuthenticationApplication
     {
-        Task<AuthenticationResponseDTO> GenerateTokenAsync(AuthenticationRequestDTO? authenticationDTO);
+        Task<AuthenticationResponseDTO> GenerateTokenAsync();
     }
 }
