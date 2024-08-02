@@ -9,5 +9,7 @@ namespace CkmBvIntegration.Application.TransferObjects.Proposal
     public class ProposalResponseDTO
     {
         public string retorno {get;set;}
+        public string codigo { get; set; }
+        public string mensagem { get; set; }
     }
 }

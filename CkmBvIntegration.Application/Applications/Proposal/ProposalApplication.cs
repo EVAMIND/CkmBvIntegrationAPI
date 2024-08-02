@@ -13,6 +13,7 @@ namespace CkmBvIntegration.Application.Applications.Authentication
     {
         private IMapper _mapper;
         private readonly IProposalRepository _proposalRepository;
+        private readonly IAuthenticationApplication _authenticationApplication;
         public ProposalApplication(
             IProposalRepository proposalRepository,
             IMapper mapper)
@@ -23,9 +24,11 @@ namespace CkmBvIntegration.Application.Applications.Authentication
 
 
         public async Task<ProposalResponseDTO> RequestCreditCardProposal(ProposalRequestDTO proposalRequestDTO, string token)
-        {          
+        {
 
-            ProposalResponse proposalResponse = await _proposalRepository.RequestCreditCardProposal(_mapper.Map<ProposalRequest>(proposalRequestDTO), token);
+            var authenticationToken = await _authenticationApplication.GenerateTokenAsync();
+
+            ProposalResponse proposalResponse = await _proposalRepository.RequestCreditCardProposal(_mapper.Map<ProposalRequest>(proposalRequestDTO), authenticationToken.access_token);
 
             return _mapper.Map<ProposalResponseDTO>(proposalResponse);
 
