@@ -1,0 +1,5 @@
+@CkmBvIntegration.API_HostAddress = https://localhost:44347
+
+GET {{CkmBvIntegration.API_HostAddress}}/weatherforecast/
+Accept: application/json
+###

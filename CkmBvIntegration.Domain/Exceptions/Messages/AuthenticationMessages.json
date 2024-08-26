@@ -1,0 +1,8 @@
+{
+  "ExceptionMessages": {
+    "ItemNotFound": "Item with id {0} not found.",
+    "UnauthorizedAccess": "Access is denied.",
+    "BadRequest": "The request could not be understood by the server due to malformed syntax.",
+    "UnexpectedError": "An unexpected error occurred."
+  }
+}
