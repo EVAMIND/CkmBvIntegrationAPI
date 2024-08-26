@@ -6,6 +6,8 @@ using Microsoft.Extensions.Configuration;
 using CkmAuthorizationTools.AuthenticationServices.Extensions;
 using CkmAuthorizationTools.AuthorizationServices.Extensions;
 using CkmBvIntegration.Domain.Models.Authentication;
+using CkmBvIntegration.API.Extensions;
+using CkmBVIntegration.API.AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 var Configuration = builder.Configuration;
@@ -18,10 +20,14 @@ Services.AddSingleton<AuthenticationResponse>();
 
 #region AutoMapper
 Services.AddAutoMapper(typeof(ApiMappingProfile));
+Services.AddAutoMapper(typeof(AplicationMappingProfile));
+
 
 #endregion
 
 Services.AddCustomAuthentication(Configuration);
+Services.AddCustomAuthorization(await Services.GetApplicationPermissions(Configuration)!);
+Services.AddCustomApiAuthorizationHandler();
 
 //Services.AddAuthentication(options =>
 //{
@@ -39,6 +45,7 @@ Services.AddCustomAuthentication(Configuration);
 // Add services to the container.
 Services.AddControllers();
 Services.AddHttpClient();
+
 
 #region Swagger 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

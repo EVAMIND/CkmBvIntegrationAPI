@@ -21,7 +21,7 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
 
             try
             {
-                jsonResponse = await PostAsync(relativeURL, proposalRequest, token);
+                jsonResponse = await PostAsync(relativeURL, proposalRequest, token,"JSON");
             }
             catch (Exception ex)
             {

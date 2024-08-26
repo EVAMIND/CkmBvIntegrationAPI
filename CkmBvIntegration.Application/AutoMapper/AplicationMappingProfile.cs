@@ -9,9 +9,9 @@ using CkmBvIntegration.Domain.Models.ProposalStatus;
 
 namespace CkmBvIntegration.Application.AutoMapper;
 
-public class ApiMappingProfile : Profile
+public class AplicationMappingProfile : Profile
 {
-    public ApiMappingProfile()
+    public AplicationMappingProfile()
     {
         #region Authentication
             CreateMap<AuthenticationRequestDTO, AuthenticationRequest>().ReverseMap();

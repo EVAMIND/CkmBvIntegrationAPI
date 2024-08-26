@@ -34,9 +34,9 @@ namespace CkmBvIntegration.Application.Applications.Authentication
                 grant_type = _configuration.GetValue<string>("Authentication:grant_type")!.DecodeString()
             };
 
-            var token = await _authenticationRepository.GenerateTokenAsync(_mapper.Map<AuthenticationRequest>(authenticationDTO));
+            _authenticationResponse = await _authenticationRepository.GenerateTokenAsync(_mapper.Map<AuthenticationRequest>(authenticationDTO));
 
-            var newToken = _mapper.Map<AuthenticationResponseDTO>(token);
+            var newToken = _mapper.Map<AuthenticationResponseDTO>(_authenticationResponse);
             newToken.TokenDate = DateTime.UtcNow;
 
             return newToken;

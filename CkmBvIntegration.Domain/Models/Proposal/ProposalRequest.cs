@@ -19,8 +19,8 @@ namespace CkmBvIntegration.Domain.Models.Proposal
         public ProposalCPF Cpf { get; set; }
         public ProposalRG Rg { get; set; }
         public ProposalEmail Email { get; set; }
-        public ProposalMailingAddress EnderecoResidencial { get; set; }
-        public ProposalHomeAddress EnderecoCorrespondencia { get; set; }
+        public ProposalMailingAddress EnderecoCorrespondencia { get; set; }
+        public ProposalHomeAddress EnderecoResidencial { get; set; }
         public ProposalIncome Renda { get; set; }
         public ProposalCellPhone Celular { get; set; }
         public ProposalPhone Telefone { get; set; }

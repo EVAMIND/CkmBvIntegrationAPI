@@ -1,9 +1,11 @@
-﻿using CkmBvIntegration.API.Controllers.Base;
+﻿using AutoMapper;
+using CkmBvIntegration.API.Controllers.Base;
 using CkmBvIntegration.API.Extensions;
 using CkmBvIntegration.Application.Applications.Authentication;
 using CkmBvIntegration.Application.Interfaces.Authentication;
 using CkmBvIntegration.Application.TransferObjects.Proposal;
 using CkmBvIntegration.Domain.Exceptions.Models;
+using CkmBVIntegrationApi.DTOs.DataTransferObjects.ProposalDTOs;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,18 +21,21 @@ namespace CkmBvIntegration.API.Controllers.Proposal
         private ILogger _logger;
         private readonly IProposalApplication _proposalApplication;
         private readonly ProposalExceptions _exceptionMessages;
+        private IMapper _mapper;
         public ProposalController(
             ILogger<ProposalController> logger, 
             IProposalApplication proposalApplication,
-            IOptions<ProposalExceptions> exceptionMessages) : base(logger)
+            IOptions<ProposalExceptions> exceptionMessages,
+            IMapper mapper) : base(logger)
         {
             _logger = logger;
             _proposalApplication = proposalApplication;
             _exceptionMessages = exceptionMessages.Value;
+            _mapper = mapper;
         }
 
         [HttpPost("RequestCreditCardProposal")]
-        public async Task<ActionResult<ProposalResponseDTO>> RequestCreditCardProposal([FromBody] ProposalRequestDTO proposalRequestDTO)
+        public async Task<ActionResult<ProposalResponseView>> RequestCreditCardProposal([FromBody] ProposalRequestView proposalRequestView)
         {
             var token = HttpContext.GetBearerToken();
 
@@ -40,10 +45,10 @@ namespace CkmBvIntegration.API.Controllers.Proposal
             return await ExecuteAsync(async () =>
             {
                 _logger.LogInformation("Iniciando processo de solicitação de proposta");
+                                
+                ProposalResponseDTO ProposalRequestDTO = await _proposalApplication.RequestCreditCardProposal(_mapper.Map<ProposalRequestDTO>(proposalRequestView), token);
 
-                ProposalResponseDTO ProposalRequestDTO = await _proposalApplication.RequestCreditCardProposal(proposalRequestDTO, token);
-
-                return ProposalRequestDTO == null ? throw new Exception(_exceptionMessages.UnexpectedError) : ProposalRequestDTO;
+                return ProposalRequestDTO == null ? throw new Exception(_exceptionMessages.UnexpectedError) : _mapper.Map<ProposalResponseView>(ProposalRequestDTO);
             });
         }
 

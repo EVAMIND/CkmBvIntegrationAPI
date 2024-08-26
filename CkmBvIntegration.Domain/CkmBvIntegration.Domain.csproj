@@ -10,4 +10,8 @@
     <Folder Include="Enums\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Evamind.CkmBVIntegrationApi.DTOs" Version="0.0.5" />
+  </ItemGroup>
+
 </Project>

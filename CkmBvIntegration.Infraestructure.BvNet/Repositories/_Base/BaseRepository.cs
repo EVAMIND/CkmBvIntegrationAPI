@@ -34,7 +34,7 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories._Base
             return await response.Content.ReadAsStringAsync();
         }
 
-        public async Task<string> PostAsync<T>(string uri, T content, string token = null)
+        public async Task<string> PostAsync<T>(string uri, T content, string token = null, string requestType = "FORM")
         {
          
             _logger.LogInformation("Iniciando Post para a url: " + uri);
@@ -47,11 +47,21 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories._Base
                 _logger.LogInformation("Bearer Token adicionado.");
             }
 
-
-
             var requestData = BuildRequestData(content);
 
-            var requestContent = new FormUrlEncodedContent(requestData);
+            //var requestContent = new FormUrlEncodedContent(requestData);
+            HttpContent requestContent = null;
+
+            switch (requestType)
+            {
+                case "FORM":
+                    requestContent = new FormUrlEncodedContent(requestData);
+                    break;
+                case "JSON":
+                    string json = JsonConvert.SerializeObject(content);
+                    requestContent = new StringContent(json, Encoding.UTF8, "application/json");
+                    break;
+            }
             //string json = JsonConvert.SerializeObject(content); 
             //var requestContent = new StringContent(json, Encoding.UTF8, "application/json"); 
             //var httpResponse = await httpClient.PostAsync("http://www.foo.bar", httpContent);
