@@ -5,6 +5,7 @@ using CkmBvIntegration.Infraestructure.BvNet.Interfaces.Proposal;
 using CkmBvIntegration.Infraestructure.BvNet.Repositories._Base;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
 {
@@ -18,6 +19,7 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
         {
             string relativeURL = $"";
             string jsonResponse;
+            ProposalResponse proposalResponse = new ProposalResponse();
 
             try
             {
@@ -28,8 +30,21 @@ namespace CkmBvIntegration.Infraestructure.BvNet.Repositories.ProposalRepository
                 _logger.LogError(message: "Error when execute RequestCreditCardProposal: " + ex.Message);
                 throw;
             }
+            var jObject = JObject.Parse(jsonResponse);
 
-            ProposalResponse proposalResponse = JsonConvert.DeserializeObject<ProposalResponse>(jsonResponse) ?? new ProposalResponse();
+            if (jObject.ContainsKey("code") && jObject.ContainsKey("message"))
+            {
+                proposalResponse = new ProposalResponse
+                {
+                    codigo = jObject["code"]?.ToString(),
+                    mensagem = jObject["message"]?.ToString(),
+                };
+            }
+            else
+            {
+                proposalResponse = JsonConvert.DeserializeObject<ProposalResponse>(jsonResponse) ?? new ProposalResponse();
+            }
+
             return proposalResponse;
         }
     }
